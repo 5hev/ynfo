@@ -10,6 +10,7 @@
                 $('.hello').html("Hi there!");
                 $('.hello').fadeTo(3000,0);
                 $('.hello').fadeTo(3000,1);
+                Cookies.set("phrase", $('.hello').html() + " I`m in!");
                 alert(Cookies.get());
             });
         </script>
