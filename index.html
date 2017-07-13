@@ -1,19 +1,87 @@
-<html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="js.cookie.js"></script>
-    </head>
-    <body>
-        <div class="hello">NOPE</div>
-        <script>
-            $(document).ready(function(){
-                $('.hello').html("Hi there!");
-                $('.hello').fadeTo(3000,0);
-                $('.hello').fadeTo(3000,1);
-                Cookies.set("phrase", $('.hello').html() + " I`m in!");
-                alert(Cookies.get("phrase"));
-            });
-        </script>
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>jQ_YOBIT</title>
+		<style>
+		div.start {
+			font-family: Arial, Verdana; 
+			font-size: 20pt;
+			text-align: left;
+			text-transform: uppercase;
+			width: 800px;
+		}
+		div[class^="res"] {
+			text-align: right;
+			width: 100%;
+			opacity: 0;
+		}
+		div.res {
+			text-align: right;
+			width: 100%;
+			opacity: 1;
+		}
+		span[class^="res"] {
+			float: left;
+			width: 200px;
+		}
+		span[class$="_0"] {
+			color: red;
+			font-weight: bold;
+		}
+		span[class$="_1"] {
+		}
+		span[class$="_2"] {
+		}
+		span[class$="_3"] {
+		}
+		</style>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.cookie.js"></script>
+		<script type="text/javascript">
+		function getValue()
+		{
+			$.ajax({
+				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/ticker/' + Cookies.get('url'),
+				headers: {'X-Requested-With': 'XMLHttpRequest'},
+				success: function (response, status, jqHRXobject) {
+					//console.log("> ", response);
+					var rObj = $.parseJSON(response);
+					
+					$('.start').empty();
+					$('.start').append('<div class="res"><span class="res">Валюта</span><span class="res">Изм.</span><span class="res">Цена</span><span class="res">Объем</span></div>');
+					
+					Object.keys(rObj).forEach(function(key, id) {
+						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
+						$('.res' + id).fadeTo(1000, 1);
+						$('.res' + id + '_0').html(key);
+						$('.res' + id + '_1').html(100 - 100 * rObj[key].last / rObj[key].avg + '% ');
+						$('.res' + id + '_2').html(rObj[key].last);
+						$('.res' + id + '_3').html(rObj[key].vol.toFixed(2));
+						
+							var options = {expires:"", path:"/", domain:"", secure:""}
+							var date = new Date;
+							date.setDate(date.getDate() + 5);
+							options.expires = date.toUTCString();
+						
+						Cookies.set($('.res' + id + '_0').html(), $('.res' + id + '_2').html(), { expires: 7 });
+						//console.log("> ", Cookies.get($('.res' + id + '_0').html()));
+						console.log("> ", $('.res' + id + '_2').html());
+						//console.log("> ", Cookies.get());
+						//if ($('.res' + id + '_1').html().slice(0,-1) > 100) { $('.res' + id + '_1').css('background-color', 'yellow');} 
+					});
+				}
+				});
+		};
+			
+		$(document).ready(function(){  
+			Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
+			console.log(" > ", Cookies.get("url"));
+            //getValue();
+			//setInterval('getValue()',10000);  
+        });
+		</script>
+	</head>
+	<body>
+	<div class="start"></div>
+	</body>
 </html>
-
