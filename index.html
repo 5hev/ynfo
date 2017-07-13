@@ -56,7 +56,13 @@
 						if (Cookies.get(key) && Cookies.get(key) != rObj[key].last) {
 							$('.res' + id).css("background-color", "#ffa500");
 							$('.res' + id).animate({ backgroundColor: "#fff" }, 1000 );
-							$('.res' + id + '_1').html((100 * rObj[key].last / Cookies.get(key)).toFixed(2)  + '% ');
+							var newChange = rObj[key].last / Cookies.get(key);
+							if (newChange >= 0) { 
+								newChange = "+" + 100 * newChange.toFixed(2) + "%" 
+							} else {
+								newChange = "-" + 100 * newChange.toFixed(2) + "%" ;
+							}
+							$('.res' + id + '_1').html(newChange);
 						} else {
 							$('.res' + id + '_1').html('0% ');
 						}
