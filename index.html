@@ -90,16 +90,18 @@
 		};
 			
 		$(document).ready(function(){  
-			if (!Cookies.get('url')) { 
-				 Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
-			 }
+			if (Cookies.get('url')) {
+				$('#url').val(Cookies.get('url'));
+			} else {
+				Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
+			}
 			getValue();
 			setInterval('getValue()',10000);  
         });
 		</script>
 	</head>
 	<body>
-	<div class="form"><input type="text" id="url" value="btc_rur-eth_btc-bitok_btc" size="75"></div>
+	<div class="form"><input type="text" id="url" size="75"></div>
 	<div class="start"></div>
 	<script type="text/javascript">
 		$( ".start" ).mouseenter(function() { $(".form").show(1000); });
