@@ -75,7 +75,7 @@
 							//console.log(" > newChange after =", newChange);
 							$('.res' + id + '_1').html(newChangeStr);
 							Cookies.set(key + "_1", newChangeStr);
-						} elseif (Cookies.get(key + "_1")) {
+						} else if (Cookies.get(key + "_1")) {
 							$('.res' + id + '_1').html(Cookies.get(key + "_1"));
 						}
 						if ($('.res' + id + '_1').html().length > 5) {
