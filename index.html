@@ -57,11 +57,13 @@
 							$('span[class^=res' + id).css("background-color", "#ffa500");
 							$('span[class^=res' + id).animate({ backgroundColor: "#fff" }, 1000 );
 							var newChange = rObj[key].last / Cookies.get(key);
+							console.log(" > newChange before =", newChange);
 							if (newChange >= 0) { 
 								newChange = "+" + 100 * newChange.toFixed(2) + "%" 
 							} else {
 								newChange = "-" + 100 * newChange.toFixed(2) + "%" ;
 							}
+							console.log(" > newChange after =", newChange);
 							$('.res' + id + '_1').html(newChange);
 						} else {
 							$('.res' + id + '_1').html('0% ');
