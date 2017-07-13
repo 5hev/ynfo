@@ -110,7 +110,7 @@
 		$( ".start" ).mouseenter(function() { $(".form").show(1000); });
 		$( ".start" ).click(function() { 
 			$(".form").hide(1000);
-			Cookies.set('url', $("#url").val());  
+			Cookies.set('url', $("#url").val(), { expires: 7 });  
 				});
 	</script>
 	</body>
