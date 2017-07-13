@@ -47,7 +47,7 @@
 		<script type="text/javascript">
 		function getValue()
 		{
-			var changeTrigger = 0.1;
+			//var changeTrigger = 0.1;
 			
 			$.ajax({
 				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/ticker/' + Cookies.get('url'),
@@ -57,28 +57,29 @@
 					
 					$('.start').empty();
 					$('.start').append('<div class="res"><span class="res">Валюта</span><span class="res">Изм.</span><span class="res">Цена</span><span class="res">Объем</span></div>');
-					
+					console.log(" > " + key + "=", Cookies.get());
 					Object.keys(rObj).forEach(function(key, id) {
-						console.log(" > " + key + "=", Cookies.get(key));
 						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
 						$('.res' + id + '_0').html(key);
 						if (Cookies.get(key) && Cookies.get(key) != rObj[key].last) {
 							$('span[class^=res' + id).css("background-color", "#ffa500");
 							$('span[class^=res' + id).animate({ backgroundColor: "#fff" }, 1000 );
 							var newChange = rObj[key].last / Cookies.get(key);
+							var newChangeStr = "";
 							//console.log(" > newChange before =", newChange);
 							if (newChange >= 1) { 
-								newChange = "+" + (100 * (newChange - 1)).toFixed(2) + "%" 
+								newChangeStr = "+" + (100 * (newChange - 1)).toFixed(2) + "%" 
 							} else {
-								newChange = (100 * (newChange - 1)).toFixed(2) + "%" ;
+								newChangeStr = (100 * (newChange - 1)).toFixed(2) + "%" ;
 							}
 							//console.log(" > newChange after =", newChange);
-							$('.res' + id + '_1').html(newChange);
-							if (Math.abs(newChange) > changeTrigger) {
-								$('span[class^=res' + id).css("background-color", "#ff0");
-							}
-						} else {
-							$('.res' + id + '_1').html('0.00% ');
+							$('.res' + id + '_1').html(newChangeStr);
+							Cookies.set(key + "_1", newChangeStr);
+						} elseif (Cookies.get(key + "_1")) {
+							$('.res' + id + '_1').html(Cookies.get(key + "_1"));
+						}
+						if ($('.res' + id + '_1').html().length > 5) {
+							$('span[class^=res' + id).css("background-color", "#ff0");
 						}
 						$('.res' + id + '_2').html(rObj[key].last);
 						$('.res' + id + '_3').html(rObj[key].vol.toFixed(2));
