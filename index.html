@@ -44,7 +44,6 @@
 				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/ticker/' + Cookies.get('url'),
 				headers: {'X-Requested-With': 'XMLHttpRequest'},
 				success: function (response, status, jqHRXobject) {
-					//console.log("> ", response);
 					var rObj = $.parseJSON(response);
 					
 					$('.start').empty();
@@ -52,20 +51,17 @@
 					
 					Object.keys(rObj).forEach(function(key, id) {
 						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
-						$('.res' + id).fadeTo(1000, 1);
 						$('.res' + id + '_0').html(key);
-						$('.res' + id + '_1').html(100 - 100 * rObj[key].last / rObj[key].avg + '% ');
+						if (Cookies.get(key) && Cookies.get(key) != rObj[key].last) {
+							$('.res' + id).fadeTo(1000, 1);
+							$('.res' + id + '_1').html((100 * rObj[key].last / Cookies.get(key)).toFixed(2)  + '% ');
+						} else {
+							$('.res' + id + '_1').html('0% ');
+						}
 						$('.res' + id + '_2').html(rObj[key].last);
 						$('.res' + id + '_3').html(rObj[key].vol.toFixed(2));
-						
-							var options = {expires:"", path:"/", domain:"", secure:""}
-							var date = new Date;
-							date.setDate(date.getDate() + 5);
-							options.expires = date.toUTCString();
-						
-						Cookies.set($('.res' + id + '_0').html(), $('.res' + id + '_2').html(), { expires: 7 });
-						//console.log("> ", Cookies.get($('.res' + id + '_0').html()));
-						console.log("> ", $('.res' + id + '_2').html());
+												
+						Cookies.set(key, rObj[key].last, { expires: 7 });
 						//console.log("> ", Cookies.get());
 						//if ($('.res' + id + '_1').html().slice(0,-1) > 100) { $('.res' + id + '_1').css('background-color', 'yellow');} 
 					});
@@ -75,8 +71,7 @@
 			
 		$(document).ready(function(){  
 			Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
-			console.log(" > ", Cookies.get("url"));
-            //getValue();
+			getValue();
 			//setInterval('getValue()',10000);  
         });
 		</script>
