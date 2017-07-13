@@ -59,9 +59,9 @@
 							var newChange = rObj[key].last / Cookies.get(key);
 							console.log(" > newChange before =", newChange);
 							if (newChange >= 1) { 
-								newChange = "+" + 100 * (newChange - 1).toFixed(2) + "%" 
+								newChange = "+" + 100 * (newChange.toFixed(4) - 1) + "%" 
 							} else {
-								newChange = "-" + 100 * (newChange - 1).toFixed(2) + "%" ;
+								newChange = "-" + 100 * (newChange.toFixed(4) - 1) + "%" ;
 							}
 							console.log(" > newChange after =", newChange);
 							$('.res' + id + '_1').html(newChange);
