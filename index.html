@@ -47,6 +47,8 @@
 		<script type="text/javascript">
 		function getValue()
 		{
+			var changeTrigger = 0.5;
+			
 			$.ajax({
 				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/ticker/' + Cookies.get('url'),
 				headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -64,14 +66,17 @@
 							$('span[class^=res' + id).css("background-color", "#ffa500");
 							$('span[class^=res' + id).animate({ backgroundColor: "#fff" }, 1000 );
 							var newChange = rObj[key].last / Cookies.get(key);
-							console.log(" > newChange before =", newChange);
+							//console.log(" > newChange before =", newChange);
 							if (newChange >= 1) { 
 								newChange = "+" + (100 * (newChange - 1)).toFixed(2) + "%" 
 							} else {
 								newChange = (100 * (newChange - 1)).toFixed(2) + "%" ;
 							}
-							console.log(" > newChange after =", newChange);
+							//console.log(" > newChange after =", newChange);
 							$('.res' + id + '_1').html(newChange);
+							if (Math.abs(newChange) > changeTrigger) {
+								$('span[class^=res' + id).css("background-color", "#ff0");
+							}
 						} else {
 							$('.res' + id + '_1').html('0% ');
 						}
@@ -79,7 +84,6 @@
 						$('.res' + id + '_3').html(rObj[key].vol.toFixed(2));
 												
 						Cookies.set(key, rObj[key].last, { expires: 7 });
-						//if ($('.res' + id + '_1').html().slice(0,-1) > 100) { $('.res' + id + '_1').css('background-color', 'yellow');} 
 					});
 				}
 				});
@@ -96,7 +100,7 @@
 	<div class="form"><input type="text" id="url" value="btc_rur-eth_btc-bitok_btc" width="100%"></div>
 	<div class="start"></div>
 	<script type="text/javascript">
-		$( "div.form" ).hover(function() { $(this).show(1000); }, function() { $(this).hide(1000); });
+		$( ".form" ).hover(function() { $("#url").show(1000); }, function() { $(#url).hide(1000); });
 	</script>
 	</body>
 </html>
