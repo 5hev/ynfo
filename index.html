@@ -57,7 +57,7 @@
 					
 					$('.start').empty();
 					$('.start').append('<div class="res"><span class="res">Валюта</span><span class="res">Изм.</span><span class="res">Цена</span><span class="res">Объем</span></div>');
-					console.log(" > " + key + "=", Cookies.get());
+					console.log(" > " , Cookies.get());
 					Object.keys(rObj).forEach(function(key, id) {
 						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
 						$('.res' + id + '_0').html(key);
