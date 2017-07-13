@@ -54,8 +54,8 @@
 						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
 						$('.res' + id + '_0').html(key);
 						if (Cookies.get(key) && Cookies.get(key) != rObj[key].last) {
-							$('.res' + id).css("background-color", "#ffa500");
-							$('.res' + id).animate({ backgroundColor: "#fff" }, 1000 );
+							$('span[class^=res' + id).css("background-color", "#ffa500");
+							$('span[class^=res' + id).animate({ backgroundColor: "#fff" }, 1000 );
 							var newChange = rObj[key].last / Cookies.get(key);
 							if (newChange >= 0) { 
 								newChange = "+" + 100 * newChange.toFixed(2) + "%" 
