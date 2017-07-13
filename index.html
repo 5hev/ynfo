@@ -97,11 +97,11 @@
 		</script>
 	</head>
 	<body>
-	<div class="form"><input type="text" id="url" value="btc_rur-eth_btc-bitok_btc" size="500px"></div>
+	<div class="form"><input type="text" id="url" value="btc_rur-eth_btc-bitok_btc" size="150"></div>
 	<div class="start"></div>
 	<script type="text/javascript">
 		$( ".start" ).mouseenter(function() { $(".form").show(1000); });
-		$( "#id" ).blur(function() { 
+		$( "#url" ).blur(function() { 
 			$(".form").hide(1000);
 			Cookies.set('url', $("#url").val());  
 				});
