@@ -13,12 +13,10 @@
 		div[class^="res"] {
 			text-align: right;
 			width: 100%;
-			opacity: 0;
 		}
 		div.res {
 			text-align: right;
 			width: 100%;
-			opacity: 1;
 		}
 		span[class^="res"] {
 			float: left;
@@ -36,6 +34,8 @@
 		}
 		</style>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js.cookie.js"></script>
 		<script type="text/javascript">
 		function getValue()
@@ -50,10 +50,12 @@
 					$('.start').append('<div class="res"><span class="res">Валюта</span><span class="res">Изм.</span><span class="res">Цена</span><span class="res">Объем</span></div>');
 					
 					Object.keys(rObj).forEach(function(key, id) {
+						console.log(" > " + key + "=", Cookies.get(key));
 						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
 						$('.res' + id + '_0').html(key);
 						if (Cookies.get(key) && Cookies.get(key) != rObj[key].last) {
-							$('.res' + id).fadeTo(1000, 1);
+							$('.res' + id).css("background-color", "#ffa500");
+							$('.res' + id).animate({ backgroundColor: "#fff" }, 1000 );
 							$('.res' + id + '_1').html((100 * rObj[key].last / Cookies.get(key)).toFixed(2)  + '% ');
 						} else {
 							$('.res' + id + '_1').html('0% ');
@@ -62,7 +64,6 @@
 						$('.res' + id + '_3').html(rObj[key].vol.toFixed(2));
 												
 						Cookies.set(key, rObj[key].last, { expires: 7 });
-						//console.log("> ", Cookies.get());
 						//if ($('.res' + id + '_1').html().slice(0,-1) > 100) { $('.res' + id + '_1').css('background-color', 'yellow');} 
 					});
 				}
