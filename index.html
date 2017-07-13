@@ -108,7 +108,7 @@
 	<div class="start"></div>
 	<script type="text/javascript">
 		$( ".start" ).mouseenter(function() { $(".form").show(1000); });
-		$( "#url" ).blur(function() { 
+		$(window).click(function() { 
 			$(".form").hide(1000);
 			Cookies.set('url', $("#url").val());  
 				});
