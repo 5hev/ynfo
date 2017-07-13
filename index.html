@@ -82,7 +82,7 @@
 						$('.res' + id + '_1').html('0.00%');
 					}
 						
-				if (newChangeStr.length > 6) {
+				if ((newChangeStr && newChangeStr.length > 6) || $('.res' + id + '_1').html().length > 6) {
 					$('span[class^=res' + id).css("background-color", "#ff0");
 				}
 				$('.res' + id + '_2').html(rObj[key].last);
@@ -109,7 +109,7 @@
 	<div class="form"><input type="text" id="url" size="75"></div>
 	<div class="start"></div>
 	<script type="text/javascript">
-		$( ".start" ).click(function() { $(".form").toggle(); });
+		$( ".start" ).click(function() { $(".form").toggle(1000); });
 		$( "#url" ).blur(function() { Cookies.set('url', $("#url").val(), { expires: 7 }) });
 	</script>
 	</body>
