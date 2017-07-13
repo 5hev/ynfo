@@ -57,7 +57,7 @@
 					
 					$('.start').empty();
 					$('.start').append('<div class="res"><span class="res">Валюта</span><span class="res">Изм.</span><span class="res">Цена</span><span class="res">Объем</span></div>');
-					console.log(" > " , Cookies.get());
+					//console.log(" > " , Cookies.get());
 					Object.keys(rObj).forEach(function(key, id) {
 						$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
 						$('.res' + id + '_0').html(key);
@@ -78,7 +78,7 @@
 						} else if (Cookies.get(key + "_1")) {
 							$('.res' + id + '_1').html(Cookies.get(key + "_1"));
 						}
-						if ($('.res' + id + '_1').html().length > 5) {
+						if ($('.res' + id + '_1').html().length > 6) {
 							$('span[class^=res' + id).css("background-color", "#ff0");
 						}
 						$('.res' + id + '_2').html(rObj[key].last);
