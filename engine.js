@@ -15,6 +15,7 @@ function getPairsArray(pairs) {
 
 function queryYobit(aPairs) {
 	aPairs.forEach(function(item,i,aPairs){aPairs[i]=aPairs[i][0];});
+	console.log(' > queryYobit = ', aPairs.join('-'));
 	return aPairs.join('-');
 }
 
@@ -35,7 +36,7 @@ function getValues(pairs)
 			context: this,
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				var rObjYobit = $.parseJSON(response);
+				rObjYobit = $.parseJSON(response);
 			}}
 			);	
 	//query Nova		
@@ -44,7 +45,7 @@ function getValues(pairs)
 			context: this,
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				var rObjNova = $.parseJSON(response);
+				rObjNova = $.parseJSON(response);
 			}}
 			);	
 	//query Polo		
@@ -53,7 +54,7 @@ function getValues(pairs)
 			context: this,
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				var rObjPolo = $.parseJSON(response);
+				rObjPolo = $.parseJSON(response);
 			}}
 			);	
 		
