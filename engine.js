@@ -1,5 +1,3 @@
-$( "#url" ).blur(function(){gerPairsArray($(this).val());});
-
 function getPairsArray(pairs) {
 	Cookies.set('url', pairs);
 	console.log(' > Saved to cookies (url): ', Cookies.get('url'));
