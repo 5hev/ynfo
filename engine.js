@@ -25,13 +25,16 @@ function getValues(pairs)
 		var URLnova =  'novaexchange.com/remote/v2/';
 		var URLpolo =  'poloniex.com/public';
 		var aPairs = getPairsArray(pairs);
+		var rObjYobit;
+		var rObjNova;
+		var rObjPolo;
 		
 	//query Yobit		
 		$.ajax({
 			url: URLproxy + URLyobit + queryYobit(aPairs),
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				var rObjYobit = $.parseJSON(response);
+				rObjYobit = $.parseJSON(response);
 			}}
 			);	
 	//query Nova		
@@ -39,7 +42,7 @@ function getValues(pairs)
 			url: URLproxy + URLnova + 'markets/',
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				var rObjNova = $.parseJSON(response).markets;
+				rObjNova = $.parseJSON(response).markets;
 			}}
 			);	
 	//query Polo		
@@ -47,7 +50,7 @@ function getValues(pairs)
 			url: URLproxy + URLpolo + '?command=returnTicker',
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				var rObjPolo = $.parseJSON(response);
+				rObjPolo = $.parseJSON(response);
 			}}
 			);	
 		
