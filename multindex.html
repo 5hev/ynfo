@@ -75,8 +75,20 @@
 		$( ".start" ).click(function() { $(".form").toggle(1000); });
 		$( "#url" ).blur(function() { 
 			var aValues = $(this).val().split('-');
-			console.log(' > ', aValues);
-			Cookies.set('url', $("#url").val(), { expires: 7 }) 
+			//get yobit pairs
+			var urlyobit = "";
+			$.ajax({
+				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/info',
+				headers: {'X-Requested-With': 'XMLHttpRequest'},
+				success: function (response, status, jqHRXobject) {
+					var rObj = $.parseJSON(response);
+					rObj.pairs.forEach (function (key, id){
+						if ($.inArray(key, aValues) > -1) { urlyobit += key + "-"; }
+					})
+					console.log(" > url-yobit = ", urlyobit);
+				}
+			Cookies.set('url', urlyobit, { expires: 7 });
+			
 		});
 	</script>
 	</body>
