@@ -106,7 +106,7 @@ function getValues(pairs)
 */
 				Cookies.set(key, rObj[key].last + ';' + keyDataNova.last_price + ';' + keyDataPolo.last, { expires: 7 });
 				console.log(' > Saved to cookies: ', Cookies.get(key));
-					}
+					})
 		};
 			
 		$(document).ready(function(){  
