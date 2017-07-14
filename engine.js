@@ -42,7 +42,7 @@ function getValues(pairs)
 			url: URLproxy + URLnova + 'markets/',
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				rObjNova = $.parseJSON(response).markets;
+				rObjNova = $.parseJSON(response);
 			}}
 			);	
 	//query Polo		
