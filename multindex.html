@@ -7,89 +7,14 @@
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js.cookie.js"></script>
-		<script type="text/javascript">
-		function getValue()
-		{
-			//var changeTrigger = 0.1;
-			
-			$.ajax({
-				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/ticker/' + Cookies.get('url'),
-				headers: {'X-Requested-With': 'XMLHttpRequest'},
-				success: function (response, status, jqHRXobject) {
-					var rObj = $.parseJSON(response);
-					
-					$('.start').empty();
-					$('.start').append('<div class="res"><span class="res">Валюта</span><span class="res">Изм.</span><span class="res">Цена</span><span class="res">Объем</span></div>');
-					//console.log(" > " , Cookies.get());
-			Object.keys(rObj).forEach(function(key, id) {
-				$('.start').append('<div class="res' + id + '"><span class="res' + id + '_0"></span><span class="res' + id + '_1"></span><span class="res' + id + '_2"></span><span class="res' + id + '_3"></span></div>');
-				$('.res' + id + '_0').html(key);
-
-					if (Cookies.get(key) && Cookies.get(key) != rObj[key].last) {
-						$('span[class^=res' + id).css("background-color", "#ffa500");
-						$('span[class^=res' + id).animate({ backgroundColor: "#fff" }, 1000 );
-						var newChange = rObj[key].last / Cookies.get(key);
-						var newChangeStr = "";
-						
-						if (newChange >= 1) { 
-							newChangeStr = "+" + (100 * (newChange - 1)).toFixed(2) + "%"; 
-						} else {
-							newChangeStr = (100 * (newChange - 1)).toFixed(2) + "%" ;
-						}
-						
-						$('.res' + id + '_1').html(newChangeStr);
-						Cookies.set(key + "_1", newChangeStr);
-					} else if (Cookies.get(key + "_1")) {
-						$('.res' + id + '_1').html(Cookies.get(key + "_1"));
-					} else {
-						$('.res' + id + '_1').html('0.00%');
-					}
-						
-				if ((newChangeStr && newChangeStr.length > 6) || $('.res' + id + '_1').html().length > 6) {
-					$('span[class^=res' + id).css("background-color", "#ff0");
-				}
-				$('.res' + id + '_2').html(rObj[key].last);
-				$('.res' + id + '_3').html(rObj[key].vol.toFixed(2));
-
-				Cookies.set(key, rObj[key].last, { expires: 7 });
-					});
-				}
-				});
-		};
-			
-		$(document).ready(function(){  
-			if (Cookies.get('url')) {
-				$('#url').val(Cookies.get('url'));
-			} else {
-				Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
-			}
-			getValue();
-			//setInterval('getValue()',10000);  
-        });
-		</script>
+		<script type="text/javascript" src="engine.js"></script>
 	</head>
-	<body>
-	<div class="form"><input type="text" id="url" size="75"></div>
-	<div class="start"></div>
-	<script type="text/javascript">
-		$( ".start" ).click(function() { $(".form").toggle(1000); });
-		$( "#url" ).blur(function() { 
-			var aValues = $(this).val().split('-');
-			//get yobit pairs
-			var urlyobit = "";
-			$.ajax({
-				url: 'https://cors-anywhere.herokuapp.com/yobit.net/api/3/info',
-				headers: {'X-Requested-With': 'XMLHttpRequest'},
-				success: function (response, status, jqHRXobject) {
-					var rObj = $.parseJSON(response);
-					rObj.pairs.forEach (function (key, id){
-						if ($.inArray(key, aValues) > -1) { urlyobit += key + "-"; }
-					})
-					console.log(" > url-yobit = ", urlyobit);
-				}
-			//Cookies.set('url', urlyobit, { expires: 7 });
-			});
-		};
-	</script>
-	</body>
+<body>
+<div class="form"><input type="text" id="url" size="75"></div>
+<div class="start"></div>
+<script type="text/javascript">
+	$( ".start" ).click(function() { $(".form").toggle(1000); });
+	$( "#url" ).blur(function(){gerPairsArray($(this).val());});
+</script>
+</body>
 </html>
