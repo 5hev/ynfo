@@ -2,45 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>jQ_YOBIT</title>
-		<style>
-		#url {
-			font-family: Arial, Verdana; 
-			font-size: 1.5vw;	
-		}
-		div.form {
-			text-align: center;
-			width: 96vw;
-			display: none;
-		}
-		div.start {
-			font-family: Arial, Verdana; 
-			font-size: 0;
-			text-align: left;
-			text-transform: uppercase;
-			width: 96vw;
-		}
-		div[class^="res"] {
-			font-size: 2.5vw;
-			width: 96vw;
-		}
-		div.res {
-			font-size: 2.5vw;
-			color: #ccc;
-			text-align: left;
-			width: 96vw;
-		}
-		span[class^="res"] {
-			text-align: right;
-			display: inline-block;
-			width: 24vw;
-		}
-		span[class$="_0"] {
-			width: 24vw;	
-			color: red;
-			text-align: right;
-			font-weight: bold;
-		}
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -101,7 +63,7 @@
 			} else {
 				Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
 			}
-			//getValue();
+			getValue();
 			//setInterval('getValue()',10000);  
         });
 		</script>
