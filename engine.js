@@ -116,6 +116,6 @@ function getValues(pairs)
 				Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
 				console.log(' > Saved to cookies (url): ', Cookies.get('url'));
 			}
-			getValues();
-			setInterval('getValue()',10000);  
+			getValues(Cookies.get('url'));
+			setInterval('getValues()',10000);  
         });
