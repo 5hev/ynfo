@@ -101,8 +101,8 @@
 			} else {
 				Cookies.set('url','btc_rur-eth_btc-bitok_btc', { expires: 7 });
 			}
-			getValue();
-			setInterval('getValue()',10000);  
+			//getValue();
+			//setInterval('getValue()',10000);  
         });
 		</script>
 	</head>
@@ -111,7 +111,11 @@
 	<div class="start"></div>
 	<script type="text/javascript">
 		$( ".start" ).click(function() { $(".form").toggle(1000); });
-		$( "#url" ).blur(function() { Cookies.set('url', $("#url").val(), { expires: 7 }) });
+		$( "#url" ).blur(function() { 
+			var aValues = $(this).val().split('-');
+			console.log(' > ', aValues);
+			Cookies.set('url', $("#url").val(), { expires: 7 }) 
+		});
 	</script>
 	</body>
 </html>
