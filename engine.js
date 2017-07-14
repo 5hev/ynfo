@@ -32,25 +32,28 @@ function getValues(pairs)
 	//query Yobit		
 		$.ajax({
 			url: URLproxy + URLyobit + queryYobit(aPairs),
+			context: this,
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				rObjYobit = $.parseJSON(response);
+				var rObjYobit = $.parseJSON(response);
 			}}
 			);	
 	//query Nova		
 		$.ajax({
 			url: URLproxy + URLnova + 'markets/',
+			context: this,
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				rObjNova = $.parseJSON(response);
+				var rObjNova = $.parseJSON(response);
 			}}
 			);	
 	//query Polo		
 		$.ajax({
 			url: URLproxy + URLpolo + '?command=returnTicker',
+			context: this,
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			success: function (response, status, jqHRXobject) {
-				rObjPolo = $.parseJSON(response);
+				var rObjPolo = $.parseJSON(response);
 			}}
 			);	
 		
