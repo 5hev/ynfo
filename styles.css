@@ -1,0 +1,37 @@
+#url {
+			font-family: Arial, Verdana; 
+			font-size: 1.5vw;	
+		}
+		div.form {
+			text-align: center;
+			width: 96vw;
+			display: none;
+		}
+		div.start {
+			font-family: Arial, Verdana; 
+			font-size: 0;
+			text-align: left;
+			text-transform: uppercase;
+			width: 96vw;
+		}
+		div[class^="res"] {
+			font-size: 2.5vw;
+			width: 96vw;
+		}
+		div.res {
+			font-size: 2.5vw;
+			color: #ccc;
+			text-align: left;
+			width: 96vw;
+		}
+		span[class^="res"] {
+			text-align: right;
+			display: inline-block;
+			width: 24vw;
+		}
+		span[class$="_0"] {
+			width: 24vw;	
+			color: red;
+			text-align: right;
+			font-weight: bold;
+		}
